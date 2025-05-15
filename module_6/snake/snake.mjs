@@ -250,22 +250,32 @@ export class TSnake {
     }
     this.#tail.draw();
   } // draw
-
   //Returns true if the snake is alive
   update(){
     if (this.#isDead) {
       return false; // Snake is dead, do not continue
     }
+    let clonePart = null;
     if(this.#head.update()) {
-      for (let i = 0; i < this.#body.length; i++) {
+      
+      
+      if (this.#growPending > 0) {
+        clonePart = this.#body[this.#body.length - 1].clone(); // Clone the last body part
+      }
+      for (let i = 0; i < this.#body.length; i++) { //
         this.#body[i].update();
       }
       // Only move the tail if not growing
       if (this.#growPending > 0) {
-        this.#growPending--;
+        this.#growPending--;  
         // Do NOT move the tail this frame
+        if (clonePart) {
+          this.#body.push(clonePart); // Add the new body part if growing
+         
+        }
         
       } else {
+        
         this.#tail.update();
       }
     }else if(!this.#isDead){

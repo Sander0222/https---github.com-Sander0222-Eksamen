@@ -104,29 +104,36 @@ const retryPos = new lib2D.TPosition(640, 399);
 
 
   draw() {
+    // Hide all buttons by default
+    this.#spPlay.visible = false;
+    this.#spResume.visible = false;
+    this.#spHome.visible = false;     // Made all buttons invisible by default to fix bug
+    this.#spRetry.visible = false;
+
     switch (GameProps.gameStatus) {
-      case EGameStatus.Idle: // whats on screen when game idle O__O
+      case EGameStatus.Idle:
+        this.#spPlay.visible = true; // Makes buttons only visable when called for
         this.#spPlay.draw();
         break;
-        case EGameStatus.Playing: // what is on screen when game is playing
+      case EGameStatus.Playing:
         this.#spScore.draw();
         this.#spBaitScore.draw();
         break;
-      case EGameStatus.Pause: // what is on screen when game is paused
-      // fix for numbers not showing when game is paused
-      this.#spScore.draw();
-      this.#spBaitScore.draw();
-      break;
-        case EGameStatus.GameOver: // what is on screen when game over
+      case EGameStatus.Pause:
+        this.#spScore.draw();
+        this.#spBaitScore.draw();
+        this.#spResume.visible = true;
+        this.#spResume.draw();
+        break;
+      case EGameStatus.GameOver:
         this.#spGameOver.draw();
+        this.#spHome.visible = true;
         this.#spHome.draw();
+        this.#spRetry.visible = true;
         this.#spRetry.draw();
         this.#spGameOverScore.draw();
         break;
     }
-
-    this.#spResume.draw();
-    
   } // end draw
 
   toggleResume() {
@@ -143,6 +150,7 @@ const retryPos = new lib2D.TPosition(640, 399);
    newGame(); // Start a new game
     this.#spPlay.visible = false;
     this.#spResume.visible = false;
+    
   
  
 
@@ -152,6 +160,8 @@ const retryPos = new lib2D.TPosition(640, 399);
     GameProps.gameStatus = EGameStatus.Idle;
     newGame(); // Start a new game
     this.#spPlay.visible = true;
+    this.#spRetry.visible = false;
+    this.#spHome.visible = false;
    
   } 
 
