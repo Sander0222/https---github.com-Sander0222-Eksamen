@@ -37,10 +37,10 @@ export const GameProps = {
   gameStatus: EGameStatus.Idle,
   snake: null,
   bait: null,
-  score: 0,
-  gameOverScore: 0,
-  countdown: 100,
-  menu: null,
+  score: 0, // Score of the game
+  gameOverScore: 0, // Score when game is over
+  countdown: 30, // Countdown score
+  menu: null, // Menu object
 };
 
 //------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ export function newGame() {
   GameProps.bait = new TBait(spcvs); // Initialize bait with a starting position
   gameSpeed = 4; // Reset game speed
   GameProps.score = 0; // Reset score
-  GameProps.countdown = 100; // Reset countdown
+  GameProps.countdown = 30; // Reset countdown
 
   // This fixes the issue with the snake still using gameSpeed from the previous game and resets it.
   clearInterval(hndUpdateGame);
@@ -66,7 +66,7 @@ export function bateIsEaten() {
   /* Logic to increase the snake size and score when bait is eaten */
 
   GameProps.score += GameProps.countdown; // Increase score by the countdown score
-  GameProps.countdown = 100; // Reset countdown score
+  GameProps.countdown = 30; // Reset countdown score
   if (GameProps.menu) {
     GameProps.menu.updateScore(GameProps.score, GameProps.countdown, GameProps.gameOverScore); // Update score on the menu
   }
@@ -83,12 +83,11 @@ function loadGame() {
   cvs.width = GameBoardSize.Cols * SheetData.Head.width;
   cvs.height = GameBoardSize.Rows * SheetData.Head.height;
 
-  GameProps.gameStatus = EGameStatus.Idle; // change game status to Idle
+  GameProps.gameStatus = EGameStatus.Idle; // change game status to Idle on start of program
 
   /* Create the game menu here */
   GameProps.menu = new TMenu(spcvs); // Create the menu object
 
-  //newGame(); // Call this function from the menu to start a new game, remove this line when the menu is ready
 
   requestAnimationFrame(drawGame);
   console.log("Game canvas is rendering!");
@@ -103,20 +102,20 @@ function drawGame() {
   switch (
     GameProps.gameStatus // set up the game status and menu
   ) {
-    case EGameStatus.Idle:
+    case EGameStatus.Idle: // whats on screen when game is idle
     GameProps.menu.draw();  
     break;
-    case EGameStatus.Playing:
+    case EGameStatus.Playing: // what is on screen when game is playing
        GameProps.bait.draw();
       GameProps.snake.draw();
       GameProps.menu.draw();
       break;
-    case EGameStatus.Pause:
+    case EGameStatus.Pause: // what is on screen when game is paused
       GameProps.bait.draw();
       GameProps.snake.draw();
       GameProps.menu.draw();
       break;
-    case EGameStatus.GameOver:
+    case EGameStatus.GameOver:    // what is on screen when game is over
     GameProps.snake.draw();
     GameProps.bait.draw();  
     GameProps.menu.draw();
@@ -135,8 +134,8 @@ function updateGame() {
         GameProps.gameStatus = EGameStatus.GameOver;
         console.log("Game over!");
       }
-      if (GameProps.countdown > 0) {
-        // Starts countdown from 100
+      if (GameProps.countdown > 0) { // Countdown logic, Made countdown speed the same as game tickspeed for added intensity
+        // Starts countdown from 30
         GameProps.countdown -= 1;
       }
       if (GameProps.menu) {

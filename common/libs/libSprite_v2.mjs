@@ -97,7 +97,11 @@ class TSpriteCanvas {
   };
 
   #mouseClick = (aEvent) => {
-    if (this.activeSprite !== null && this.activeSprite.onClick !== null) {
+    if (
+      this.activeSprite !== null &&
+      this.activeSprite.onClick !== null &&
+      this.activeSprite.visible // Bug in code were you clan click a button multiple times when not visible and not updated mouse position, this fixes it
+    ) {
       this.activeSprite.onClick(aEvent, this.activeSprite);
     }
   };

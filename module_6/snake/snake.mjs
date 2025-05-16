@@ -270,7 +270,7 @@ export class TSnake {
         this.#growPending--;  
         // Do NOT move the tail this frame
         if (clonePart) {
-          this.#body.push(clonePart); // Add the new body part if growing
+          this.#body.push(clonePart); // Add the new body part if growing 
          
         }
         

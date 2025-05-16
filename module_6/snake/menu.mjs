@@ -13,7 +13,7 @@ import {
 } from "./game.mjs";
 
 import { TBoardCell, EBoardCellInfoType } from "./gameBoard.mjs";
-export class TMenu {
+export class TMenu { //Making the menu class for assigning the buttons and their functions
   #spPlay;
   #spGameOver;
   #spGameOverScore;
@@ -38,15 +38,15 @@ export class TMenu {
       SheetData.Play,
       pos
     );
-    this.#spPlay.animateSpeed = 30;
-    this.#spPlay.onClick = this.#startGameClick.bind(this);
+    this.#spPlay.animateSpeed = 30; // Set animation speed for built inn animation function
+    this.#spPlay.onClick = this.#startGameClick.bind(this); // start the startGameClick function
 
     this.#spResume = new libSprite.TSpriteButton(
       aSpriteCanvas,                                  // create resume button
       SheetData.Resume, 
       pos
     );
-    this.#spResume.animateSpeed = 30;
+    this.#spResume.animateSpeed = 30;  // Set animation speed for built inn animation function
     this.#spResume.onClick = this.toggleResume.bind(this);  // bind to toggleResume (spacebar)
     this.#spResume.visible = false; 
     
@@ -57,14 +57,14 @@ export class TMenu {
     SheetData.Number,   
     new lib2D.TPosition(pos.x, pos.y)
  );
-this.#spScore.alpha = 0.5; // Set transparency to 50%
+this.#spScore.alpha = 0.5; // Set transparency to 50% with the bulit inn alpha function
  const baitScorePos = new lib2D.TPosition(10, 10);
  this.#spBaitScore = new libSprite.TSpriteNumber(  // create bait score text
     aSpriteCanvas,
     SheetData.Number,   
     baitScorePos
  );
-  this.#spBaitScore.alpha = 0.5; // Set transparency to 50%
+  this.#spBaitScore.alpha = 0.5; // Set transparency to 50% with the bulit inn alpha function
     const gameOverPos = new lib2D.TPosition(27, 50);
     this.#spGameOver = new libSprite.TSprite(   // create game over display
       aSpriteCanvas,
@@ -79,7 +79,7 @@ this.#spScore.alpha = 0.5; // Set transparency to 50%
       SheetData.Home,
       homePos 
     );
-    this.#spHome.onClick = this.#startIdleClick.bind(this);
+    this.#spHome.onClick = this.#startIdleClick.bind(this); //start the startIdleClick function
     
     
     
@@ -90,10 +90,10 @@ const retryPos = new lib2D.TPosition(640, 399);
       retryPos
     );
     
-    this.#spRetry.onClick = this.#startGameClick.bind(this);
+    this.#spRetry.onClick = this.#startGameClick.bind(this); // start the startGameClick function
     
    
-    const gameOverScorePos = new lib2D.TPosition(530, 250);
+    const gameOverScorePos = new lib2D.TPosition(520, 250);
     this.#spGameOverScore = new libSprite.TSpriteNumber(  // create game over score text
       aSpriteCanvas,
       SheetData.Number,   
@@ -111,21 +111,21 @@ const retryPos = new lib2D.TPosition(640, 399);
     this.#spRetry.visible = false;
 
     switch (GameProps.gameStatus) {
-      case EGameStatus.Idle:
-        this.#spPlay.visible = true; // Makes buttons only visable when called for
+      case EGameStatus.Idle: // whats on the screen when idle
+        this.#spPlay.visible = true; // Makes buttons only visable when called for vv
         this.#spPlay.draw();
         break;
-      case EGameStatus.Playing:
+      case EGameStatus.Playing: // what is on the screen when playing
         this.#spScore.draw();
         this.#spBaitScore.draw();
         break;
-      case EGameStatus.Pause:
+      case EGameStatus.Pause: // what is on the screen when paused
         this.#spScore.draw();
         this.#spBaitScore.draw();
         this.#spResume.visible = true;
         this.#spResume.draw();
         break;
-      case EGameStatus.GameOver:
+      case EGameStatus.GameOver: // what is on the screen when game over
         this.#spGameOver.draw();
         this.#spHome.visible = true;
         this.#spHome.draw();
@@ -145,7 +145,7 @@ const retryPos = new lib2D.TPosition(640, 399);
     this.#spResume.visible = GameProps.gameStatus === EGameStatus.Pause;
   }
 
-  #startGameClick() {
+  #startGameClick() { //Startgame to handle the start game status
     GameProps.gameStatus = EGameStatus.Playing;
    newGame(); // Start a new game
     this.#spPlay.visible = false;
@@ -156,7 +156,7 @@ const retryPos = new lib2D.TPosition(640, 399);
 
   } // end startGame
 
-  #startIdleClick() {
+  #startIdleClick() {   //Startidle to handle the idle game status 
     GameProps.gameStatus = EGameStatus.Idle;
     newGame(); // Start a new game
     this.#spPlay.visible = true;
@@ -165,15 +165,11 @@ const retryPos = new lib2D.TPosition(640, 399);
    
   } 
 
-  updateScore(totalScore, countdown) {
+  updateScore(totalScore, countdown) {  //Handles the score and countdown values 
     this.#spScore.value = totalScore; // Update the total score text
     this.#spBaitScore.value = countdown; // Update the countdown score text
     this.#spGameOverScore.value = totalScore; // Update the game over score text with value from total score
   }
- /*showGameOver() {
-    this.#spGameOver.visible = true;
-    this.#spHome.visible = true;
-    this.#spRetry.visible = true;
-  } //  showGameOver */
+ 
  
 }
