@@ -39,7 +39,7 @@ export const GameProps = {
   bait: null,
   score: 0, // Score of the game
   gameOverScore: 0, // Score when game is over
-  countdown: 30, // Countdown score
+  countdown: 50, // Countdown score
   menu: null, // Menu object
 };
 
@@ -53,7 +53,7 @@ export function newGame() {
   GameProps.bait = new TBait(spcvs); // Initialize bait with a starting position
   gameSpeed = 4; // Reset game speed
   GameProps.score = 0; // Reset score
-  GameProps.countdown = 30; // Reset countdown
+  GameProps.countdown = 50; // Reset countdown
 
   // This fixes the issue with the snake still using gameSpeed from the previous game and resets it.
   clearInterval(hndUpdateGame);
@@ -66,7 +66,7 @@ export function bateIsEaten() {
   /* Logic to increase the snake size and score when bait is eaten */
 
   GameProps.score += GameProps.countdown; // Increase score by the countdown score
-  GameProps.countdown = 30; // Reset countdown score
+  GameProps.countdown = 50; // Reset countdown score
   if (GameProps.menu) {
     GameProps.menu.updateScore(GameProps.score, GameProps.countdown, GameProps.gameOverScore); // Update score on the menu
   }
@@ -135,7 +135,7 @@ function updateGame() {
         console.log("Game over!");
       }
       if (GameProps.countdown > 0) { // Countdown logic, Made countdown speed the same as game tickspeed for added intensity
-        // Starts countdown from 30
+        // Starts countdown from 50
         GameProps.countdown -= 1;
       }
       if (GameProps.menu) {
