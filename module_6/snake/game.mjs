@@ -65,7 +65,7 @@ export function bateIsEaten() {
   console.log("Bait eaten!");
   /* Logic to increase the snake size and score when bait is eaten */
 
-  GameProps.score += GameProps.countdown; // Increase score by the countdown score
+  GameProps.score += GameProps.countdown; // Increase score with the countdown score
   GameProps.countdown = 50; // Reset countdown score
   if (GameProps.menu) {
     GameProps.menu.updateScore(GameProps.score, GameProps.countdown, GameProps.gameOverScore); // Update score on the menu
