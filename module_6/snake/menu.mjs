@@ -57,14 +57,14 @@ export class TMenu { //Making the menu class for assigning the buttons and their
     SheetData.Number,   
     new lib2D.TPosition(pos.x, pos.y)
  );
-this.#spScore.alpha = 0.5; // Set transparency to 50% with the bulit inn alpha function
+this.#spScore.alpha = 0.5; // Set transparency to 50% with the built inn alpha function
  const baitScorePos = new lib2D.TPosition(10, 10);
  this.#spBaitScore = new libSprite.TSpriteNumber(  // create bait score text
     aSpriteCanvas,
     SheetData.Number,   
     baitScorePos
  );
-  this.#spBaitScore.alpha = 0.5; // Set transparency to 50% with the bulit inn alpha function
+  this.#spBaitScore.alpha = 0.5; // Set transparency to 50% with the built inn alpha function
     const gameOverPos = new lib2D.TPosition(27, 50);
     this.#spGameOver = new libSprite.TSprite(   // create game over display
       aSpriteCanvas,
@@ -137,7 +137,7 @@ const retryPos = new lib2D.TPosition(640, 399);
   } // end draw
 
   toggleResume() {
-    if (GameProps.gameStatus === EGameStatus.Pause) {  // resumes game on button input in menu 
+    if (GameProps.gameStatus === EGameStatus.Pause) {  // resumes game on button input in menu, help from teacher
       GameProps.gameStatus = EGameStatus.Playing;
     } else if(GameProps.gameStatus === EGameStatus.Playing) {
       GameProps.gameStatus = EGameStatus.Pause;

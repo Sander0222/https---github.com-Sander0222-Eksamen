@@ -260,7 +260,7 @@ export class TSnake {
       
       
       if (this.#growPending > 0) {
-        clonePart = this.#body[this.#body.length - 1].clone(); // Clone the last body part
+        clonePart = this.#body[this.#body.length - 1].clone(); // Clone the last body part, help from teacher 
       }
       for (let i = 0; i < this.#body.length; i++) { //
         this.#body[i].update();

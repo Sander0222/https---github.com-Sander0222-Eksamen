@@ -55,7 +55,7 @@ export function newGame() {
   GameProps.score = 0; // Reset score
   GameProps.countdown = 50; // Reset countdown
 
-  // This fixes the issue with the snake still using gameSpeed from the previous game and resets it.
+  // This fixes the issue with the snake still using gameSpeed from the previous game and resets it.Help from copilot
   clearInterval(hndUpdateGame);
   hndUpdateGame = setInterval(updateGame, 1000 / gameSpeed);
   console.log("Game loop restarted with gameSpeed:", gameSpeed);
@@ -147,7 +147,7 @@ function updateGame() {
 
 function increaseGameSpeed() {
   /* Increase game speed logic here */
-  gameSpeed += 0.4; // from copilot suggestion
+  gameSpeed += 0.4; // help from copilot
   clearInterval(hndUpdateGame);
   hndUpdateGame = setInterval(updateGame, 1000 / gameSpeed); // Update game every 1000ms / gameSpeed
   console.log("Game speed increased to: " + gameSpeed);
